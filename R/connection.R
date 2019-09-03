@@ -7,11 +7,11 @@
 #-------------------------------------------------------------------------------
 
 ##' @title connectToOpenSILEXWS
-##' @param apiID character, a character name of an API ("ws_1_public","ws_2_public" or "ws_private")
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'
 ##' @param username login of the user to create the token
 ##' @param password password of the user to create the token
+##' @param reconnection to force the client reconnection
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
@@ -22,7 +22,7 @@
 ##' WS2 - connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",
 ##'           password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 ##' @export
-connectToOpenSILEXWS<-function(username, password, url){
+connectToOpenSILEXWS<-function(username, password, url, reconnection = TRUE){
   
   if (is.null(username) || username == "") {
     stop("Please, give an username")
@@ -40,7 +40,7 @@ connectToOpenSILEXWS<-function(username, password, url){
   tokenData = opensilexWSClientR::getToken(username,password)
   
   if(!is.null(tokenData) && length(tokenData) > 0) {
-    setLoginUserInformations(username, password, tokenData)
+    setLoginUserInformations(username, password, tokenData, reconnection)
   }else{
     stop("Not able to connect to the specified OpenSILEX WS")
   }

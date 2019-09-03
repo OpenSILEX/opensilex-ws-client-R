@@ -28,16 +28,34 @@ Update   : 03/09/2019
 # Creation of an identifier
 Ask permission to request to the web service:
 
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  # If you want to access to an OpenSILEX web service, you have to insert the address of the WS and the port
+  connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+```
+# Set log level
+To get more or less informations on calls:
+
 ```{r,echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE}
-  # If you want to access to a private web service, you have to insert the address of the WS and the port
-  connectToOpenSILEXWS(apiID="ws_private","guestphis@supagro.inra.fr","guestphis",url = "147.99.7.5:8080/phenomeapi/resources/")
+  setLogLevel("DEBUG")
 ```
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   # If you want to access to a private web service, you have to insert the address of the WS and the port
-  connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+  connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
 
+# Creation of an identifier
+Ask permission to request to the web service:
+
+```{r,echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  connectToOpenSILEXWS("guestphis@supagro.inra.fr","guestphis",url = "147.99.7.5:8080/phenomeapi/resources/")
+```
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+```
 # Session info
 
 ```{r session,echo=FALSE,message=FALSE, warning=FALSE}

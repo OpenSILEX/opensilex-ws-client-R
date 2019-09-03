@@ -96,7 +96,7 @@ setLogLevel<-function(level= "INFO"){
 ##' @param tokenData S3 class, saves informations extract from WS getToken response
 ##' @description Save information in config environment
 ##' @keywords internal
-setLoginUserInformations<-function(username,password,tokenData,reconnection = TRUE){
+setLoginUserInformations<-function(username,password,tokenData, reconnection = TRUE){
   # save user parameters in config environment
   assign("TOKEN_VALUE", tokenData$data, configWS)
   assign("USERNAME", username, configWS)
@@ -107,7 +107,10 @@ setLoginUserInformations<-function(username,password,tokenData,reconnection = TR
   assign("TOKEN_VALID",TRUE,configWS)
   assign("USER_VALID",TRUE,configWS)
   
+  # set reconnection variable
+  if(!is.logical(reconnection)) reconnection = FALSE
   assign("RECONNECT_ON_DISCONNECTION", reconnection)
+  
   # on reconnection "TOKEN_VALID" parameters expires when WS reach end token validity
   later::later(function(){assign("TOKEN_VALID",FALSE,configWS)},tokenData$expiresIn + 1)
   

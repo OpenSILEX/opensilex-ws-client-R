@@ -9,7 +9,6 @@
 # Update: 03/09/2019 by I.Sanchez
 #-------------------------------------------------------------------------------
 
-
 ##' @title getResponseFromWS retrieves the data of a service from the WS
 ##'
 ##' @description Create an URL to call the WS and return a formatted response of WSResponse class.

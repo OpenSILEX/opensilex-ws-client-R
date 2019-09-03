@@ -15,7 +15,8 @@
 ##' @return a session token user identifier in the WS
 ##' @examples
 ##' \donttest{
-##' connectToOpenSILEXWS("guestphis@supagro.inra.fr","guestphis","http://147.100.179.156:8080/phenomeapi/resources/")
+##' connectToOpenSILEXWS("guestphis@supagro.inra.fr","guestphis",
+##'          "http://147.100.179.156:8080/phenomeapi/resources/")
 ##' aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
 ##' aToken$data
 ##' }

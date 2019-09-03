@@ -4,7 +4,7 @@
 \alias{connectToOpenSILEXWS}
 \title{connectToOpenSILEXWS}
 \usage{
-connectToOpenSILEXWS(username, password, url)
+connectToOpenSILEXWS(username, password, url, reconnection = TRUE)
 }
 \arguments{
 \item{username}{login of the user to create the token}
@@ -14,7 +14,7 @@ connectToOpenSILEXWS(username, password, url)
 \item{url}{character, if apiID is private add the url of the chosen API, containing the IP,
 the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'}
 
-\item{apiID}{character, a character name of an API ("ws_1_public","ws_2_public" or "ws_private")}
+\item{reconnection}{to force the client reconnection}
 }
 \description{
 load name space and connexion parameters of the webservice.
@@ -22,9 +22,8 @@ Execute only once at the beginning of the requests.
 In the case of a WebService change of address or a renaming of services, please edit this list.
 and execute the function.
 Demonstration instances
-WS1 - connectToOpenSILEXWS(apiID="ws_1_public","guestphis@supagro.inra.fr","guestphis")
-WS2 - connectToOpenSILEXWS(apiID="ws_2_public","guest@opensilex.org","guest")
-
-WS2 Custom - connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",
+WS1 - connectToOpenSILEXWS(apiID="ws_1_public","guestphis@supagro.inra.fr","guestphis",
+                           url = "http://147.100.179.156:8080/phenomeapi/resources/")
+WS2 - connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",
           password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")
 }
