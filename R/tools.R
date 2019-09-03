@@ -44,7 +44,7 @@ getDataAndShowStatus<-function(responseObject){
       logging::loginfo("Additional Request information :")
       if( logging::getLogger()$level >  get("DEBUG_LEVEL",configWS)[["NOTSET"]] &&
           logging::getLogger()$level <=  get("DEBUG_LEVEL",configWS)[["INFO"]]){
-          print(json$metadata$status)
+        print(json$metadata$status)
       } 
     
       status = json$metadata$status
