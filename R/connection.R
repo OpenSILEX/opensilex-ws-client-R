@@ -34,6 +34,7 @@ connectToOpenSILEXWS<-function(username, password, url, reconnection = TRUE){
     stop("Please, give an url")
   }  
   
+  # set url
   assign("BASE_PATH", url, configWS)
   
   # get token
@@ -45,3 +46,32 @@ connectToOpenSILEXWS<-function(username, password, url, reconnection = TRUE){
     stop("Not able to connect to the specified OpenSILEX WS")
   }
 } 
+
+
+##' @title connectToOpenSILEXWSWithToken
+##' @description Save information in config environment
+##' @param token character, set a token without reconnection
+##' @param wsVersion numeric, the version of the webservice
+##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
+##'            the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'
+##' @keywords internal
+connectToOpenSILEXWSWithToken<-function(token, url, wsVersion = 2){
+  # save user parameters in config environment
+  assign("BASE_PATH", url, configWS)
+  assign("TOKEN_VALUE", token, configWS)
+  assign("USERNAME", "", configWS)
+  assign("PASSWORD", "", configWS)
+  assign("WS_VERSION", wsVersion, configWS)
+  assign("TOKEN_VALID",TRUE,configWS)
+  assign("USER_VALID",TRUE,configWS)
+  
+  # set reconnection variable
+  assign("RECONNECT_ON_DISCONNECTION", FALSE)
+  
+  #debug
+  logging::logdebug(paste("BASE_PATH",get("BASE_PATH", configWS)))
+  logging::logdebug(paste("USERNAME",get("USERNAME",configWS)))
+  logging::logdebug(paste("TOKEN_VALUE",get("TOKEN_VALUE",configWS)))
+  logging::logdebug(paste("WS_VERSION",get("WS_VERSION",configWS)))
+  logging::logdebug(paste("TOKEN_VALID_TIME",get("TOKEN_VALID_TIME",configWS)))
+}

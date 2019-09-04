@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# Program: getResponseFromWS.R
-# Objective: functions to facilitate requests on a OpenSILEX web service
+# Program: getCall.R
+# Objective: functions to facilitate GET requests on a OpenSILEX web service
 #             * getResponseFromWS: Dispatch responses for WS1 or WS2
 #             * getResponseFromWS1: retreive data for WS1
 #             * getResponseFromWS2: retreive data for WS2
@@ -21,13 +21,15 @@
 getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type="application/json"){
     if(!get("USER_VALID",configWS)) stop("You must first connect to an OpenSILEX Instance using connectToOpenSILEXWS() function")
     
-    if(!get("TOKEN_VALID",configWS) && get("RECONNECT_ON_DISCONNECTION",configWS)){
-      logging::loginfo("Token expired. Reconnecting to WS ... ")
-      connectToOpenSILEXWS("ws_private",get("USERNAME",configWS),get("PASSWORD",configWS),get("BASE_PATH",configWS))
-      if(!get("TOKEN_VALID",configWS)) stop("You cannot use this service on this OpenSILEX Instance")
-      logging::loginfo("Reconnected to WS ... ")
-    }else{
-      stop("You must first connect to an OpenSILEX Instance using connectToOpenSILEXWS() function")
+    if(!get("TOKEN_VALID",configWS)){ #  token not valid 
+      if(get("RECONNECT_ON_DISCONNECTION",configWS)){ # try to reconnect
+        logging::loginfo("Token expired. Reconnecting to WS ... ")
+        connectToOpenSILEXWS(get("USERNAME",configWS),get("PASSWORD",configWS),get("BASE_PATH",configWS))
+        if(!get("TOKEN_VALID",configWS)) stop("The reconnection has failed")
+        logging::loginfo("Reconnected to WS ... ")
+      }else{ 
+        stop("You must first connect to an OpenSILEX Instance using connectToOpenSILEXWS() function")
+      }
     }
     
     if(wsVersion != get("WS_VERSION",configWS)) stop("You cannot use this service on this OpenSILEX Instance")
