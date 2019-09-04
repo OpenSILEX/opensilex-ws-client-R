@@ -17,7 +17,7 @@ library(remotes)
 install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE)
 ```
 
-You can also download a tar.gz archive of "[master](https://github.com/OpenSILEX/opensilexWSClientR/tree/master)" version and install it with _install_packages()_.
+You can also download a tar.gz archive of "[master](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/master)" version and install it with _install_packages()_.
 
 # Usage
 
