@@ -27,10 +27,22 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type=
     }
     
     if(wsVersion != get("WS_VERSION",configWS)) stop("You cannot use this service on this OpenSILEX Instance")
-    if(wsVersion == 1){
+    
+    # set Page
+    if(exists(page, where=attributes) && is.null(attributes[["page"]])){
+       attributes[["page"]]  <- get("DEFAULT_PAGE", configWS)
+    }
+    
+    # set pageSize
+    if(exists(pageSize, where=attributes) && is.null(attributes[["pageSize"]])){
+     attributes[["pageSize"]]  <- get("DEFAULT_PAGESIZE", configWS)
+    }
+   
+   if(wsVersion == 1){
       responseWS <- getResponseFromWS1(resource = resource, paramPath= paramPath, attributes = attributes, type= type)
     }
-    if(wsVersion == 2){
+  
+  if(wsVersion == 2){
       responseWS <- getResponseFromWS2(resource = resource, paramPath= paramPath, attributes = attributes, type= type)
     }
   return(responseWS)
