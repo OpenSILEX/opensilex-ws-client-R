@@ -6,7 +6,7 @@ A set of basic functions to connect R to an OpenSILEX web service. Public access
 
 This package is used by other packages.
 
-- [phisWSClientR](https://github.com/OpenSILEX/opensilexWSClientR/tree/master)
+- [phisWSClientR](https://github.com/OpenSILEX/phisWSClientR/tree/master)
 
 # Installation
 
