@@ -8,9 +8,19 @@ getResponseFromWS(resource, paramPath = NULL, attributes, wsVersion,
   type = "application/json")
 }
 \arguments{
-\item{responseObject}{object HTTP httr}
+\item{resource}{character, the name of the service to call}
+
+\item{paramPath}{character, the extension of the service to call, default to NULL}
+
+\item{attributes}{character, the list of attributes to give to the GET request}
+
+\item{wsVersion}{numeric, the version of the webservice}
+
+\item{type}{character, the type of the output, default to application/json}
+}
+\value{
+responseObject object HTTP httr
 }
 \description{
 Create an URL to call the WS and return a formatted response of WSResponse class.
 }
-\keyword{internal}

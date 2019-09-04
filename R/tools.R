@@ -70,10 +70,9 @@ getDataAndShowStatus<-function(responseObject){
 ##' @param obj an object
 ##' @description Returns the type of object received by R Development function
 ##' @return string
-##' @importFrom utils str
 ##' @keywords internal
 ObjectType<-function(obj){
-  return(utils::capture.output(str(obj)))
+  return(utils::capture.output(utils::str(obj)))
 }
 
 ##'@title setLogLevel
