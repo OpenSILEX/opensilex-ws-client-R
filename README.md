@@ -36,7 +36,7 @@ How to had a github R package to description file : [dependencies](https://githu
 
 You can give a test to the package using the available vignettes (/doc directory) and use the documentation. if you have some difficulties to retrieve the html vignettes, you can use https://rawgit.com on the github file paths:
 
-- https://github.com/OpenSILEX/opensilex-ws-client-r/blob/master/doc/OpenSILEXrequests.html
+- https://github.com/OpenSILEX/opensilex-ws-client-r/blob/master/doc/OpenSILEXWSConnection.html
 
 # Citation
 
