@@ -11,17 +11,16 @@ Description: a set of generic functions to connect R to an OpenSILEXweb service 
    with specific login as well as private access if the user has an account on an instance of the OpenSILEX information system .
 Depends:
     R (>= 3.2.0)
+    urltools,
+    logging
 License: GPL-3
 LazyData: TRUE
 Imports:
     tidyr,
     dplyr,
     lubridate,
-    jsonlite,
     httr,
-    urltools,
     openssl,
-    logging,
     later
 Suggests:
     roxygen2,

@@ -92,7 +92,7 @@ ObjectType <- function(obj) {
 ##'@export
 setLogLevel <- function(level = "INFO") {
   debugLevelList <- get("DEBUG_LEVEL", configWS)
-  if (exists(level, where = debugLevelList)) {
+  if (!is.null(level) && exists(level, where = debugLevelList)) {
     logging::setLevel(debugLevelList[[level]])
     print(paste("Log level set to", level))
   } else{
