@@ -121,9 +121,11 @@ setLoginUserInformations <-
     assign("USER_VALID", TRUE, configWS)
     
     # set reconnection variable
-    if (!is.logical(reconnection))
-      reconnection = FALSE
-    assign("RECONNECT_ON_DISCONNECTION", reconnection)
+    if (!is.logical(reconnection)){
+        assign("RECONNECT_ON_DISCONNECTION", FALSE)
+    }else{
+        assign("RECONNECT_ON_DISCONNECTION", reconnection)
+    } 
     
     # on reconnection "TOKEN_VALID" parameters expires when WS reach end token validity
     later::later(function() {
