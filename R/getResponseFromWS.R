@@ -10,9 +10,13 @@
 #-------------------------------------------------------------------------------
 
 ##' @title getResponseFromWS retrieves the data of a service from the WS
-##'
+##' @param resource character, the name of the service to call
+##' @param paramPath character, the extension of the service to call, default to NULL
+##' @param attributes character, the list of attributes to give to the GET request
+##' @param type character, the type of the output, default to application/json
+##' @param wsVersion numeric, the version of the webservice
 ##' @description Create an URL to call the WS and return a formatted response of WSResponse class.
-##' @param responseObject object HTTP httr
+##' @return  responseObject object HTTP httr
 ##' @export
 getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type="application/json"){
     if(!get("USER_VALID",configWS)) stop("You must first connect to an OpenSILEX Instance using connectToOpenSILEXWS() function")
@@ -29,12 +33,12 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type=
     if(wsVersion != get("WS_VERSION",configWS)) stop("You cannot use this service on this OpenSILEX Instance")
     
     # set Page
-    if(exists(page, where=attributes) && is.null(attributes[["page"]])){
+    if(exists("page", where=attributes) && is.null(attributes[["page"]])){
        attributes[["page"]]  <- get("DEFAULT_PAGE", configWS)
     }
     
     # set pageSize
-    if(exists(pageSize, where=attributes) && is.null(attributes[["pageSize"]])){
+    if(exists("pageSize", where=attributes) && is.null(attributes[["pageSize"]])){
      attributes[["pageSize"]]  <- get("DEFAULT_PAGESIZE", configWS)
     }
    

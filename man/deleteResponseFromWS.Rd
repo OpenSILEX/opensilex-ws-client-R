@@ -24,4 +24,3 @@ WSResponse WSResponse class instance
 \description{
 Create an URL to call the WS and return a formatted response of WSResponse class.
 }
-\keyword{internal}
