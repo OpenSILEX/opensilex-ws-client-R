@@ -13,7 +13,7 @@
 ##'
 ##' @description Create an URL to call the WS and return a formatted response of WSResponse class.
 ##' @param responseObject object HTTP httr
-##' @keywords internal
+##' @export
 getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type="application/json"){
     if(!get("USER_VALID",configWS)) stop("You must first connect to an OpenSILEX Instance using connectToOpenSILEXWS() function")
     

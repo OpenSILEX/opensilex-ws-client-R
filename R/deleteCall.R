@@ -15,7 +15,7 @@
 ##' @param encode character, type of encodage
 ##' @param requestBody body data which will be send
 ##' @return WSResponse WSResponse class instance
-##' @keywords internal
+##' @export
 deleteResponseFromWS<-function(resource, requestBody, paramPath = NULL, attributes = list(),  encode ="json"){
   #configWS<-connectToOpenSILEXWS()
   webserviceBaseUrl <- configWS[["BASE_PATH"]]
