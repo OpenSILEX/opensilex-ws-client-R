@@ -31,7 +31,6 @@ buildBinary:
    - mkdir -p $R_LIBS
    - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
    - R -e '.libPaths()'
-   - R -e 'install.packages(c("triebeard"))'
    - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE, repos = c(Sys.getenv("R_REPOS")))'
   script:
    - R -e 'devtools::build(binary = TRUE)'
