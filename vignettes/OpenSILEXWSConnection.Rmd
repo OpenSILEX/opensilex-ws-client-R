@@ -1,0 +1,67 @@
+---
+title: "Requests on the web service"
+author: "I.Sanchez & A. Charleroy (INRA MISTEA)"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{Connection on the web service}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!---
+Program  : OpenSILEXrequests.Rmd
+Author   : I.Sanchez (MISTEA), A.Charleroy (MISTEA)
+Objective: a vignette for phisWSClientR library
+           an introduction to requesting the phenomeapi (phis web service)
+Creation : 19/03/2018
+Update   : 03/09/2019
+-->
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  library(opensilexWSClientR)
+```
+
+# Creation of an identifier
+Ask permission to request to the web service:
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  # If you want to access to an OpenSILEX web service, you have to insert the address of the WS and the port
+  connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+```
+# Set log level
+To get more or less informations on calls:
+
+```{r,echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE}
+  setLogLevel("DEBUG")
+```
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+```
+
+# Creation of an identifier
+Ask permission to request to the web service:
+
+```{r,echo=TRUE,eval=FALSE,message=FALSE, warning=FALSE}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  connectToOpenSILEXWS("guestphis@supagro.inra.fr","guestphis",url = "147.99.7.5:8080/phenomeapi/resources/")
+```
+
+```{r,echo=TRUE,message=FALSE, warning=FALSE}
+  # If you want to access to a private web service, you have to insert the address of the WS and the port
+  connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
+```
+# Session info
+
+```{r session,echo=FALSE,message=FALSE, warning=FALSE}
+  sessionInfo()
+```
+
+# References
+1. R Development Core Team (2015). R: A language and environment for statistical computing. R Foundation for
+      Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL http://www.R-project.org.
