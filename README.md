@@ -32,8 +32,7 @@ help(package="opensilexWSClientR")
 
 You can give a test to the package using the available vignettes (/doc directory) and use the documentation. if you have some difficulties to retrieve the html vignettes, you can use https://rawgit.com on the github file paths:
 
-- https://github.com/OpenSILEX/opensilexWSClientR/blob/master/doc/introWS2.html
-- https://github.com/OpenSILEX/opensilexWSClientR/blob/master/doc/requestWS.html
+- https://github.com/OpenSILEX/opensilex-ws-client-r/blob/master/doc/OpenSILEXrequests.html
 
 # Citation
 
