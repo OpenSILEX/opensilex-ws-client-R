@@ -13,7 +13,7 @@ Depends:
     R (>= 3.2.0)
     urltools,
     logging
-License: GPL-3
+License: GPL-3 | file LICENCE
 LazyData: TRUE
 Imports:
     tidyr,
