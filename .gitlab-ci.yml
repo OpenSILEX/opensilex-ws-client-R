@@ -24,33 +24,30 @@ cache:
       - ".cache/install_deps"
       - ".Renviron"
 
-before_script:
-  - mkdir -p $R_LIBS
-  - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
-  - R -e '.libPaths()'
-  - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
-
-
 # create an archive 
 buildBinary:
   stage: build
-  
+  before_script:
+   - mkdir -p $R_LIBS
+   - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
+   - R -e '.libPaths()'
+   - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
 checkErrors:
   stage: check
   script:
+    - R -e '.libPaths()'
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
-  only:
-    - master
 
 checkWarnings:
   allow_failure: true
   stage: check
   script:
+    - R -e '.libPaths()'
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
@@ -59,6 +56,7 @@ checkNotes:
   allow_failure: true
   stage: check
   script:
+    - R -e '.libPaths()'
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
@@ -67,6 +65,7 @@ unitTests:
   when: manual
   stage: test
   script:
+    - R -e '.libPaths()'
     - mkdir -p $R_TMP_USER
     - R -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) system("touch $R_TMP_USER/testsFail")
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi
