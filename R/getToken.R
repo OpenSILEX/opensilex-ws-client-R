@@ -6,7 +6,7 @@
 # Update: 29/10/2018 (by I.Sanchez) - 03/09/2019 (by  A. Charleroy)
 #-------------------------------------------------------------------------------
 
-##' @title retrieves a user identifier for connexion to the web service
+##' @title retrieves a user identifier for connexion to the web service 
 ##'
 ##' @description Retrieves a user identifier for connexion to the WebService (WS)
 ##' @param login login of the user to create the token
