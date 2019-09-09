@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="I.Sanchez &amp; A. Charleroy (INRA MISTEA)" />
@@ -343,18 +344,6 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -376,7 +365,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Requests on the web service</h1>
 <h4 class="author">I.Sanchez &amp; A. Charleroy (INRA MISTEA)</h4>
-<h4 class="date">septembre 04, 2019</h4>
+<h4 class="date">septembre 09, 2019</h4>
 
 </div>
 
@@ -393,18 +382,19 @@ $(document).ready(function () {
 <!---
 Program  : OpenSILEXrequests.Rmd
 Author   : I.Sanchez (MISTEA), A.Charleroy (MISTEA)
-Objective: a vignette for phisWSClientR library
-           an introduction to requesting the phenomeapi (phis web service)
+Objective: a vignette for opensilexWSClientR library
+           an introduction to requesting an OpenSILEX web service
 Creation : 19/03/2018
-Update   : 03/09/2019
+Update   : 09/09/2019
 -->
 <pre class="r"><code>  library(opensilexWSClientR)</code></pre>
+<p>The <strong>opensilexWSClientR</strong> library allows an openSILEX user to create a connection to the web services of this system of information <strong>openSILEX</strong>. If the user wants to have access to PHIS data for example, he has to load this library and create a connexion to the specified url.</p>
 <div id="creation-of-an-identifier" class="section level1">
 <h1><span class="header-section-number">1</span> Creation of an identifier</h1>
-<p>Ask permission to request to the web service:</p>
+<p>Ask permission to request to a web service. The user has to give a username, a password and a web service URL:</p>
 <pre class="r"><code>  # If you want to access to an OpenSILEX web service, you have to insert the address of the WS and the port
   connectToOpenSILEXWS(username=&quot;guest@opensilex.org&quot;,password=&quot;guest&quot;, url = &quot;www.opensilex.org/openSilexAPI/rest/&quot;)</code></pre>
-<pre><code>## 2019-09-04 16:31:55 INFO::Query executed and data recovered - WS2</code></pre>
+<pre><code>## 2019-09-09 15:49:46 INFO::Query executed and data recovered - WS2</code></pre>
 </div>
 <div id="set-log-level" class="section level1">
 <h1><span class="header-section-number">2</span> Set log level</h1>
@@ -412,7 +402,7 @@ Update   : 03/09/2019
 <pre class="r"><code>  setLogLevel(&quot;DEBUG&quot;)</code></pre>
 <pre class="r"><code>  # If you want to access to a private web service, you have to insert the address of the WS and the port
   connectToOpenSILEXWS(username=&quot;guest@opensilex.org&quot;,password=&quot;guest&quot;, url = &quot;www.opensilex.org/openSilexAPI/rest/&quot;)</code></pre>
-<pre><code>## 2019-09-04 16:31:56 INFO::Query executed and data recovered - WS2</code></pre>
+<pre><code>## 2019-09-09 15:49:46 INFO::Query executed and data recovered - WS2</code></pre>
 </div>
 <div id="creation-of-an-identifier-1" class="section level1">
 <h1><span class="header-section-number">3</span> Creation of an identifier</h1>
@@ -421,16 +411,16 @@ Update   : 03/09/2019
   connectToOpenSILEXWS(&quot;guestphis@supagro.inra.fr&quot;,&quot;guestphis&quot;,url = &quot;147.99.7.5:8080/phenomeapi/resources/&quot;)</code></pre>
 <pre class="r"><code>  # If you want to access to a private web service, you have to insert the address of the WS and the port
   connectToOpenSILEXWS(username=&quot;guest@opensilex.org&quot;,password=&quot;guest&quot;, url = &quot;www.opensilex.org/openSilexAPI/rest/&quot;)</code></pre>
-<pre><code>## 2019-09-04 16:31:56 INFO::Query executed and data recovered - WS2</code></pre>
+<pre><code>## 2019-09-09 15:49:46 INFO::Query executed and data recovered - WS2</code></pre>
 </div>
 <div id="session-info" class="section level1">
 <h1><span class="header-section-number">4</span> Session info</h1>
-<pre><code>## R version 3.4.4 (2018-03-15)
+<pre><code>## R version 3.6.1 (2019-07-05)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 16.04.6 LTS
 ## 
 ## Matrix products: default
-## BLAS: /usr/lib/libblas/libblas.so.3.6.0
+## BLAS:   /usr/lib/libblas/libblas.so.3.6.0
 ## LAPACK: /usr/lib/lapack/liblapack.so.3.6.0
 ## 
 ## locale:
@@ -448,19 +438,19 @@ Update   : 03/09/2019
 ## [1] opensilexWSClientR_1.0.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.2        later_0.8.0       compiler_3.4.4   
-##  [4] prettyunits_1.0.2 remotes_2.1.0     tools_3.4.4      
-##  [7] testthat_2.0.1    digest_0.6.20     pkgbuild_1.0.2   
+##  [1] Rcpp_1.0.2        later_0.8.0       compiler_3.6.1   
+##  [4] prettyunits_1.0.2 remotes_2.1.0     tools_3.6.1      
+##  [7] testthat_2.1.1    digest_0.6.20     pkgbuild_1.0.3   
 ## [10] pkgload_1.0.2     jsonlite_1.6      memoise_1.1.0    
-## [13] evaluate_0.13     rlang_0.4.0       cli_1.1.0        
-## [16] rstudioapi_0.9.0  curl_4.0          yaml_2.2.0       
-## [19] xfun_0.5          withr_2.1.2       stringr_1.4.0    
-## [22] httr_1.4.1        knitr_1.22        desc_1.2.0       
-## [25] fs_1.2.6          askpass_1.1       devtools_2.0.1   
+## [13] evaluate_0.14     rlang_0.4.0       cli_1.1.0        
+## [16] rstudioapi_0.10   curl_4.0          yaml_2.2.0       
+## [19] xfun_0.8          withr_2.1.2       stringr_1.4.0    
+## [22] httr_1.4.1        knitr_1.23        desc_1.2.0       
+## [25] fs_1.3.1          askpass_1.1       devtools_2.1.0   
 ## [28] rprojroot_1.3-2   glue_1.3.1        R6_2.4.0         
-## [31] processx_3.2.1    rmarkdown_1.12    sessioninfo_1.1.1
-## [34] callr_3.1.1       magrittr_1.5      backports_1.1.4  
-## [37] ps_1.3.0          htmltools_0.3.6   usethis_1.4.0    
+## [31] processx_3.4.0    rmarkdown_1.14    sessioninfo_1.1.1
+## [34] callr_3.3.0       magrittr_1.5      backports_1.1.4  
+## [37] ps_1.3.0          htmltools_0.3.6   usethis_1.5.1    
 ## [40] assertthat_0.2.1  logging_0.10-108  stringi_1.4.3    
 ## [43] openssl_1.4.1     crayon_1.3.4</code></pre>
 </div>
@@ -488,6 +478,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

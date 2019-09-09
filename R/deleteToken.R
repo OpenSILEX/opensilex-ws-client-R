@@ -3,7 +3,7 @@
 # Objective: generic function to requests OpenSILEX WebService
 # Author: A. Charleroy
 # Creation: 03/09/2019
-# Update: 
+# Update: 09/09/2019
 #-------------------------------------------------------------------------------
 
 ##' @title disconnect a user identifier for connexion to the web service
@@ -24,11 +24,9 @@ disconnectFromOpenSILEXWS<-function(){
     deleteResponseFromWS(resource = get("BRAPITOKEN",configWS), requestBody = requestBody)
   }
   
-  
   assign("BASE_PATH","", configWS)
   assign("USERNAME","", configWS)
   assign("PASSWORD","", configWS)
   assign("TOKEN_VALID", FALSE,configWS)
   assign("USER_VALID", FALSE,configWS)
-  
 }

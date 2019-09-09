@@ -5,22 +5,20 @@
 \title{deleteResponseFromWS}
 \usage{
 deleteResponseFromWS(resource, requestBody, paramPath = NULL,
-  attributes = list(), encode = "json")
+  attributes = list())
 }
 \arguments{
 \item{resource}{character, the name of the webservice resource}
 
-\item{requestBody}{body data which will be send}
+\item{requestBody}{character, body data which will be send}
 
 \item{paramPath}{character, path URL encoded parameter}
 
 \item{attributes}{query parameters}
-
-\item{encode}{character, type of encodage}
 }
 \value{
 WSResponse WSResponse class instance
 }
 \description{
-Create an URL to call the WS and return a formatted response of WSResponse class.
+Create a URL to call the WS and return a formatted response of WSResponse class.
 }

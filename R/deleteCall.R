@@ -8,15 +8,14 @@
 
 ##' @title deleteResponseFromWS
 ##'
-##' @description Create an URL to call the WS and return a formatted response of WSResponse class.
+##' @description Create a URL to call the WS and return a formatted response of WSResponse class.
 ##' @param resource character, the name of the webservice resource
 ##' @param paramPath character, path URL encoded parameter
 ##' @param attributes query parameters
-##' @param encode character, type of encodage
-##' @param requestBody body data which will be send
+##' @param requestBody character, body data which will be send
 ##' @return WSResponse WSResponse class instance
 ##' @export
-deleteResponseFromWS<-function(resource, requestBody, paramPath = NULL, attributes = list(),  encode ="json"){
+deleteResponseFromWS<-function(resource, requestBody, paramPath = NULL, attributes = list()){
   #configWS<-connectToOpenSILEXWS()
   webserviceBaseUrl <- configWS[["BASE_PATH"]]
   urlParams = ""
