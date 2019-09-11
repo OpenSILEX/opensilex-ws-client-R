@@ -3,14 +3,14 @@
 # Objective: generic function to requests OpenSILEX WebService
 # Author: A. Charleroy
 # Creation: 12/08/2016
-# Update: 29/10/2018 (by I.Sanchez) - 03/09/2019 (by  A. Charleroy)
+# Update: 09/09/2019 (by I.Sanchez) - 03/09/2019 (by  A. Charleroy)
 #-------------------------------------------------------------------------------
 
-##' @title retrieves a user identifier for connexion to the web service
+##' @title retrieves a user identifier for connexion to the web service 
 ##'
 ##' @description Retrieves a user identifier for connexion to the WebService (WS)
-##' @param login login of the user to create the token
-##' @param password password of the user to create the token
+##' @param login character, login of the user to create the token
+##' @param password character, password of the user to create the token
 
 ##' @return a session token user identifier in the WS
 ##' @examples
@@ -90,8 +90,8 @@ getToken<-function(login,password){
 ##' @description Create a token to call the webservice for authentication and
 ##' returns a formatted response of WSResponse class.
 ##' @param resource character, an resource from the web service api
+##' @param paramPath character, 
 ##' @param attributes a list containing a login and a password
-
 ##' @details This function is OK for the first version of the web service
 ##'  (a GET call with a visible request)
 ##' @seealso http://docs.brapi.apiary.io/#introduction/url-structure

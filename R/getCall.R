@@ -1,4 +1,4 @@
-#-------------------------------------------------------------------------------
+  #-------------------------------------------------------------------------------
 # Program: getCall.R
 # Objective: functions to facilitate GET requests on a OpenSILEX web service
 #             * getResponseFromWS: Dispatch responses for WS1 or WS2
@@ -55,6 +55,7 @@ getResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type=
 }
 
 
+#----------------------------------------------------------------------#
 ##' @title getResponseFromWS1 retrieves the data of a service from the WS1
 ##' @param resource character, the name of the service to call
 ##' @param paramPath character, the extension of the service to call, default to NULL
@@ -121,7 +122,7 @@ getResponseFromWS1<-function(resource,paramPath = NULL,attributes,type="applicat
 ##' @param paramPath character, the extension of the service to call, default to NULL
 ##' @param attributes character, the list of attributes to give to the GET request
 ##' @param type character, the type of the output, default to application/json
-##' @return  responseObject object HTTP httr
+##' @return responseObject object HTTP httr
 ##' @keywords internal
 getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "application/json"){
   # test ws type

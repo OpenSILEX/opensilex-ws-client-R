@@ -15,23 +15,26 @@ vignette: >
 <!---
 Program  : OpenSILEXrequests.Rmd
 Author   : I.Sanchez (MISTEA), A.Charleroy (MISTEA)
-Objective: a vignette for phisWSClientR library
-           an introduction to requesting the phenomeapi (phis web service)
+Objective: a vignette for opensilexWSClientR library
+           an introduction to requesting an OpenSILEX web service
 Creation : 19/03/2018
-Update   : 03/09/2019
+Update   : 09/09/2019
 -->
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   library(opensilexWSClientR)
 ```
 
+The **opensilexWSClientR** library allows an openSILEX user to create a connection to the web services of this system of information **openSILEX**. If the user wants to have access to PHIS data for example, he has to load this library and create a connexion to the specified url.
+
 # Creation of an identifier
-Ask permission to request to the web service:
+Ask permission to request to a web service. The user has to give a username, a password and a web service URL:
 
 ```{r,echo=TRUE,message=FALSE, warning=FALSE}
   # If you want to access to an OpenSILEX web service, you have to insert the address of the WS and the port
   connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
+
 # Set log level
 To get more or less informations on calls:
 
@@ -56,6 +59,7 @@ Ask permission to request to the web service:
   # If you want to access to a private web service, you have to insert the address of the WS and the port
   connectToOpenSILEXWS(username="guest@opensilex.org",password="guest", url = "www.opensilex.org/openSilexAPI/rest/")
 ```
+
 # Session info
 
 ```{r session,echo=FALSE,message=FALSE, warning=FALSE}

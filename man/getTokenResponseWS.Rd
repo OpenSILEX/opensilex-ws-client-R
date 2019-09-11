@@ -10,6 +10,8 @@ getTokenResponseWS(resource, paramPath = NULL, attributes,
 \arguments{
 \item{resource}{character, an resource from the web service api}
 
+\item{paramPath}{character,}
+
 \item{attributes}{a list containing a login and a password}
 }
 \value{

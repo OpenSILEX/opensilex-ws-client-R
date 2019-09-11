@@ -7,9 +7,9 @@
 getToken(login, password)
 }
 \arguments{
-\item{login}{login of the user to create the token}
+\item{login}{character, login of the user to create the token}
 
-\item{password}{password of the user to create the token}
+\item{password}{character, password of the user to create the token}
 }
 \value{
 a session token user identifier in the WS
