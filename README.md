@@ -8,7 +8,7 @@ This package is used by other packages.
 
 - [phisWSClientR](https://github.com/OpenSILEX/phisWSClientR/tree/master)
 
-# Installation
+## Installation
 
 To install the **opensilexWSClientR** package, the easiest is to install it directly from Github. Open an R session and run the following commands:
 
@@ -17,9 +17,9 @@ library(remotes)
 install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="v1.0.0")
 ```
 
-You can also download a tar.gz archive of "[v1.0.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/v1.0.0" version and install it with _install_packages()_.
+You can also download a tar.gz archive of "[v1.0.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/v1.0.0") version and install it with _install_packages()_.
 
-# Usage
+## Usage
 
 Once the package is installed on your computer, it can be loaded into a R session:
 
@@ -28,17 +28,17 @@ library(opensilexWSClientR)
 help(package="opensilexWSClientR")
 ```
 
-# Use this R package in another R package from github
+## Use this R package in another R package from github
 
 How to had a github R package to description file : [dependencies](https://github.com/r-lib/remotes/blob/master/vignettes/dependencies.Rmd)
 
-# Test
+## Test
 
 You can give a test to the package using the available vignettes (/doc directory) and use the documentation. if you have some difficulties to retrieve the html vignettes, you can use https://rawgit.com on the github file paths:
 
-- https://github.com/OpenSILEX/opensilex-ws-client-r/blob/master/doc/OpenSILEXWSConnection.html
+- [OpenSILEXWSConnection.html](https://github.com/OpenSILEX/opensilex-ws-client-r/blob/master/doc/OpenSILEXWSConnection.html)
 
-# Citation
+## Citation
 
 You should cite the **opensilexWSClientR** package:
 
