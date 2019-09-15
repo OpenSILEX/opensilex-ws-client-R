@@ -85,8 +85,7 @@ installFromGithub:
   stage: test
   script:
     - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref=paste0("v",desc$get("Version")[[1]]))'
-  only:
-    - master
+
 
 installLocally:
   stage: test

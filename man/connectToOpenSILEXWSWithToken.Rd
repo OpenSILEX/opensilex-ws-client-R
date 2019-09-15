@@ -17,4 +17,3 @@ the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest
 \description{
 Save information in config environment
 }
-\keyword{internal}
