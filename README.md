@@ -32,6 +32,29 @@ help(package="opensilexWSClientR")
 
 How to had a github R package to description file : [dependencies](https://github.com/r-lib/remotes/blob/master/vignettes/dependencies.Rmd)
 
+## Use this R package in another a shiny application to retreive parameters
+set a connection
+```R
+##' @title connectShinyAppToOpenSILEX
+##' @description Retreive connection parameters automatically 
+##'              from the shiny app url
+##' @param wsVersion numeric, version of the web service by default 
+##'        it's equals to 2, (the latest version of OpenSILEX
+##'        webservice) 
+##' @export
+connectShinyAppToOpenSILEX<-function(wsVersion = 2){
+    # Here you read the URL parameter from session$clientData$url_search
+    shiny::observe({
+      query <- shiny::parseQueryString(shiny::session$clientData$url_search)
+      if (!is.null(query[['token']]) && !is.null(query[['wsUrl']])) {
+        connectToOpenSILEXWSWithToken(query[['token']], query[['wsUrl']], wsVersion = wsVersion)
+      }else{
+        stop("Can't find requested parameters \"wsUrl\" and \"token\" in URL")
+      }
+    })
+}
+```
+
 ## Test
 
 You can give a test to the package using the available vignettes (/doc directory) and use the documentation. if you have some difficulties to retrieve the html vignettes, you can use https://rawgit.com on the github file paths:

@@ -56,7 +56,7 @@ connectToOpenSILEXWS<-function(username, password, url, reconnection = TRUE){
 ##' @param wsVersion numeric, the version of the webservice
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'
-##' @keywords internal
+##' @export
 connectToOpenSILEXWSWithToken<-function(token, url, wsVersion = 2){
   # save user parameters in config environment
   assign("BASE_PATH", url, configWS)
