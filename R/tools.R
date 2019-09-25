@@ -69,7 +69,7 @@ getDataAndShowStatus <- function(responseObject) {
       codeHttp = responseObject$status_code,
       codeHttpMessage = msg,
       codeStatusMessage = status,
-      data = json$result$data
+      data = c(json$result$data, json$metadata$datafiles)
     )
   }
   class(response) <- append(class(response), "WSResponse")
