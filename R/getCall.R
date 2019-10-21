@@ -6,7 +6,7 @@
 #             * getResponseFromWS2: retreive data for WS2
 # Authors: A. Charleroy, I.Sanchez, J.E.Hollebecq, E.Chourrout
 # Creation: 24/01/2019
-# Update: 03/09/2019 by I.Sanchez
+# Update: 03/09/2019 by I.Sanchez, 07/10/2019 by A. Charleroy
 #-------------------------------------------------------------------------------
 
 ##' @title getResponseFromWS retrieves the data of a service from the WS
@@ -97,20 +97,6 @@ getResponseFromWS1<-function(resource,paramPath = NULL,attributes,type="applicat
     print(proc.time() - ptm)
     print(r)
   } 
-  
-  if(r$status_code >= 500){
-    logging::logerror("WebService internal error")
-  }
-  if(r$status_code == 401){
-    logging::logerror("User not authorized")
-  }
-  if(r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
-    logging::logerror("Bad user request")
-  }
-  if(r$status_code >= 200 && r$status_code < 300){
-    logging::loginfo("Query executed and data recovered")
-  }
-  
   return(getDataAndShowStatus(r))
 }
 
@@ -160,19 +146,6 @@ getResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "a
     print(proc.time() - ptm)
     print(r)
   } 
-  
-  if(r$status_code >= 500){
-    logging::logerror("WebService internal error")
-  }
-  if(r$status_code == 401){
-    logging::logerror("User not authorized")
-  }
-  if(r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
-    logging::logerror("Bad user request")
-  }
-  if(r$status_code >= 200 && r$status_code < 300){
-    logging::loginfo("Query executed and data recovered")
-  }
   
   return(getDataAndShowStatus(r))
 }

@@ -3,13 +3,12 @@
 # Objective: functions to facilitate manage data from http call
 # Author: A. Charleroy
 # Creation: 03/09/2019
-# Update:
+# Update: 07/10/2019 by A. Charleroy
 #-------------------------------------------------------------------------------
 
 ##' @title getDataAndShowStatus
 ##'
-##' @description Recupere les status et les informations presentes dans les entetes de reponse HTTP
-##'  ainsi que dans la partie metadata de la reponse
+##' @description Retreive httr response status and data linked to it 
 ##' @param responseObject objet de reponse HTTP httr
 ##' @keywords internal
 getDataAndShowStatus <- function(responseObject) {
@@ -20,6 +19,7 @@ getDataAndShowStatus <- function(responseObject) {
       as = "text",
       encoding = "UTF-8")
     )
+  msg <- showStatus(responseObject)
   if (responseObject$status_code >= 400) {
     if (!is.null(json$metadata$status) &&
         length(json$metadata$status) > 0) {
@@ -27,17 +27,7 @@ getDataAndShowStatus <- function(responseObject) {
       logging::loginfo("Additional Request information :")
       logging::loginfo(status)
     }
-    if (responseObject$status_code >= 500) {
-      msg = "WebService internal error"
-    }
-    if (responseObject$status_code == 401) {
-      msg = "User not authorized"
-    }
-    if (responseObject$status_code >= 400 &&
-        responseObject$status_code != 401 &&
-        responseObject$status_code < 500) {
-      msg = "Bad user request"
-    }
+    
     response <- list(
       currentPage = NULL,
       totalCount = NULL,
@@ -58,10 +48,8 @@ getDataAndShowStatus <- function(responseObject) {
       
       status = json$metadata$status
     }
-    if (responseObject$status_code >= 200 &&
-        responseObject$status_code < 300) {
-      msg = "Query executed and data recovered"
-    }
+  
+    logging::loginfo(msg)
     response <- list(
       currentPage = json$metadata$pagination$currentPage,
       totalCount = json$metadata$pagination$totalCount,
@@ -74,6 +62,41 @@ getDataAndShowStatus <- function(responseObject) {
   }
   class(response) <- append(class(response), "WSResponse")
   return(response)
+}
+
+##' @title showStatus
+##'
+##' @description Show status
+##' @param responseObject objet de reponse HTTP httr
+##' @return character, message describes the response 
+##' @keywords internal
+showStatus <- function(responseObject) {
+  msg <- ""
+  if (responseObject$status_code >= 400) {
+    if (responseObject$status_code >= 500) {
+      msg = "WebService internal error"
+      logging::logerror(msg)
+    }
+    if (responseObject$status_code == 401) {
+      msg = "User not authorized"
+      logging::logerror(msg)
+    }
+    if (responseObject$status_code == 404) {
+      msg = "Data not found"
+      logging::logwarn(msg)
+    }
+    if (responseObject$status_code != 401 &&
+        responseObject$status_code != 404 &&
+        responseObject$status_code < 500) {
+      msg = "Bad user request"
+      logging::logerror(msg)
+    }
+  }
+  if (responseObject$status_code >= 200 &&
+      responseObject$status_code < 300) {
+    msg = "Query executed and data recovered"
+  }
+  return(msg);
 }
 
 ##' @title ObjectType

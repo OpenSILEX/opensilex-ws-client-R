@@ -98,19 +98,6 @@ postResponseFromWS1<-function(resource,paramPath = NULL,attributes,type="applica
     print(r)
   }
   
-  if(r$status_code >= 500){
-    logging::logerror("WebService internal error")
-  }
-  if(r$status_code == 401){
-    logging::logerror("User not authorized")
-  }
-  if(r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
-    logging::logerror("Bad user request")
-  }
-  if(r$status_code >= 200 && r$status_code < 300){
-    logging::loginfo("Query executed and data recovered")
-  }
-  
   return(getDataAndShowStatus(r))
 }
 
@@ -136,26 +123,14 @@ postResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "
   }
   
   ptm <- proc.time()
-  r <- httr::POST(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")), body = list(attributes), encode = "json")
+  r <- httr::POST(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")), body = attributes, encode = "json")
+  print(r)
   #debug
   logging::logdebug("Request Time : " )
   if(logging::getLogger()$level == get("DEBUG_LEVEL",configWS)[["DEBUG"]]){
     print(proc.time() - ptm)
     print(r)
   } 
-  
-  if(r$status_code >= 500){
-    logging::logerror("WebService internal error")
-  }
-  if(r$status_code == 401){
-    logging::logerror("User not authorized")
-  }
-  if(r$status_code >= 400 && r$status_code != 401 &&  r$status_code < 500){
-    logging::logerror("Bad user request")
-  }
-  if(r$status_code >= 200 && r$status_code < 300){
-    logging::loginfo("Query executed and data exported")
-  }
   
   return(getDataAndShowStatus(r))
 }
