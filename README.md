@@ -19,6 +19,8 @@ install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="1.1.
 
 You can also download a tar.gz archive of "[1.1.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/1.1.0") version and install it with _install_packages()_.
 
+This package use [Semantic Versioning Specification](https://semver.org/) for versionning tags.
+
 ## Usage
 
 Once the package is installed on your computer, it can be loaded into a R session:
