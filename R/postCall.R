@@ -18,7 +18,7 @@
 ##' @description Create an URL to call the WS and return a formatted response of WSResponse class.
 ##' @return  responseObject object HTTP httr
 ##' @export
-postResponseFromWS<-function(resource,paramPath = NULL,attributes,wsVersion,type="application/json"){
+postResponseFromWS<-function(resource, paramPath = NULL, attributes, wsVersion, type="application/json"){
   if(!get("USER_VALID",configWS)) stop("You must first connect to an OpenSILEX Instance using connectToOpenSILEXWS() function")
   
   if(!get("TOKEN_VALID",configWS)){ #  token not valid 
@@ -121,9 +121,10 @@ postResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "
   } else {
     finalurl <- paste0(webserviceBaseUrl, resource , "/", paramPath)
   }
-  
+  if(!is.data.frame(attributes)) attributes = list(attributes)
+    
   ptm <- proc.time()
-  r <- httr::POST(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")), body = attributes, encode = "json")
+    r <- httr::POST(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")), body = attributes, encode = "json")
   print(r)
   #debug
   logging::logdebug("Request Time : " )

@@ -4,8 +4,12 @@
 \alias{postResponseFromWS1}
 \title{postResponseFromWS1 retrieves the data of a service from the WS1}
 \usage{
-postResponseFromWS1(resource, paramPath = NULL, attributes,
-  type = "application/json")
+postResponseFromWS1(
+  resource,
+  paramPath = NULL,
+  attributes,
+  type = "application/json"
+)
 }
 \arguments{
 \item{resource}{character, the name of the service to call}

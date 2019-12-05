@@ -4,8 +4,12 @@
 \alias{getTokenResponseWS}
 \title{getTokenResponseWS}
 \usage{
-getTokenResponseWS(resource, paramPath = NULL, attributes,
-  type = "application/json")
+getTokenResponseWS(
+  resource,
+  paramPath = NULL,
+  attributes,
+  type = "application/json"
+)
 }
 \arguments{
 \item{resource}{character, an resource from the web service api}
