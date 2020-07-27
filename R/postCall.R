@@ -34,16 +34,6 @@ postResponseFromWS<-function(resource, paramPath = NULL, attributes, wsVersion, 
   
   if(wsVersion != get("WS_VERSION",configWS)) stop("You cannot use this service on this OpenSILEX Instance")
   
-  # set Page
-  if(exists("page", where=attributes) && is.null(attributes[["page"]])){
-    attributes[["page"]]  <- get("DEFAULT_PAGE", configWS)
-  }
-  
-  # set pageSize
-  if(exists("pageSize", where=attributes) && is.null(attributes[["pageSize"]])){
-    attributes[["pageSize"]]  <- get("DEFAULT_PAGESIZE", configWS)
-  }
-  
   if(wsVersion == 1){
     responseWS <- postResponseFromWS1(resource = resource, paramPath= paramPath, attributes = attributes, type= type)
   }
@@ -111,7 +101,7 @@ postResponseFromWS1<-function(resource,paramPath = NULL,attributes,type="applica
 ##' @param type character, the type of the output, default to application/json
 ##' @return responseObject object HTTP httr
 ##' @keywords internal
-postResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "application/json"){
+postResponseFromWS2 <- function(resource, paramPath = NULL, attributes= NULL, type = "application/json"){
   # test ws type
   if( get("WS_VERSION", configWS))
   webserviceBaseUrl <- get("BASE_PATH", configWS)
@@ -122,15 +112,19 @@ postResponseFromWS2 <- function(resource, paramPath = NULL, attributes, type = "
     finalurl <- paste0(webserviceBaseUrl, resource , "/", paramPath)
   }
   if(!is.data.frame(attributes)) attributes = list(attributes)
-    
-  ptm <- proc.time()
-    r <- httr::POST(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")), body = attributes, encode = "json")
-  print(r)
-  #debug
-  logging::logdebug("Request Time : " )
   if(logging::getLogger()$level == get("DEBUG_LEVEL",configWS)[["DEBUG"]]){
+    print("attributes")
+    print(head(attributes))
+  }  
+ 
+  
+  if(logging::getLogger()$level == get("DEBUG_LEVEL",configWS)[["DEBUG"]]){
+    ptm <- proc.time()
+    r <- httr::POST(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")), body = attributes, encode = "json", httr::verbose())
     print(proc.time() - ptm)
     print(r)
+  }else{
+    r <- httr::POST(finalurl, config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")), body = attributes, encode = "json")
   } 
   
   return(getDataAndShowStatus(r))
