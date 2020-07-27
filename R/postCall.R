@@ -114,7 +114,7 @@ postResponseFromWS2 <- function(resource, paramPath = NULL, attributes= NULL, ty
   if(!is.data.frame(attributes)) attributes = list(attributes)
   if(logging::getLogger()$level == get("DEBUG_LEVEL",configWS)[["DEBUG"]]){
     print("attributes")
-    print(head(attributes))
+    print(utils::head(attributes))
   }  
  
   
