@@ -27,10 +27,7 @@ variables:
       - ".cache/install_deps"
       - ".Renviron"
 
- 
-
 .prepare_script_r: &prepare_script_r
-  <<: *cache_dependencies
   image: "registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4"
  
 # create an archive 
