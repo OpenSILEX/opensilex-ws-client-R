@@ -47,6 +47,8 @@ build:image:
     - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4
   rules:
     - when: manual
+    allow_failure: true
+
 
 
 checkErrors:
