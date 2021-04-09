@@ -14,10 +14,10 @@ To install the **opensilexWSClientR** package, the easiest is to install it dire
 
 ```R
 library(remotes)
-install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="1.1.1")
+install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="2.0.0")
 ```
 
-You can also download a tar.gz archive of "[1.1.1](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/1.1.1") version and install it with _install_packages()_.
+You can also download a tar.gz archive of "[2.0.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/2.0.0") version and install it with _install_packages()_.
 
 This package use [Semantic Versioning Specification](https://semver.org/) for versionning tags.
 
@@ -40,11 +40,8 @@ set a connection
 ##' @title connectShinyAppToOpenSILEX
 ##' @description Retreive connection parameters automatically 
 ##'              from the shiny app url
-##' @param wsVersion numeric, version of the web service by default 
-##'        it's equals to 2, (the latest version of OpenSILEX
-##'        webservice) 
 ##' @export
-connectShinyAppToOpenSILEX<-function(wsVersion = 2){
+connectShinyAppToOpenSILEX<-function(){
     # Here you read the URL parameter from session$clientData$url_search
     shiny::observe({
       query <- shiny::parseQueryString(shiny::session$clientData$url_search)

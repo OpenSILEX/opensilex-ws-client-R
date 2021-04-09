@@ -35,15 +35,12 @@ configWS<-new.env(emptyenv())
   assign("PASSWORD","", configWS)
   assign("TOKEN_VALID", FALSE,configWS)
   assign("USER_VALID", FALSE,configWS)
-  assign("WS_VERSION", 0,configWS)
   assign("TOKEN_VALUE", NULL, configWS)
-  assign("TOKEN_CREATED_AT", "", configWS)
-  assign("TOKEN_VALID_TIME",0 ,configWS)
-  assign("RECONNECT_ON_DISCONNECTION", TRUE)
-  
-  assign("BRAPITOKEN", "brapi/v1/token", configWS)
+
+  assign("AUTHENTICATION", "security/authenticate", configWS)
+  assign("DISCONNECTION", "security/logout", configWS)
   assign("TOKEN", "token", configWS)
-  
+
   assign("DEFAULT_PAGE", 0, configWS)
   assign("DEFAULT_PAGESIZE", 100, configWS)
   

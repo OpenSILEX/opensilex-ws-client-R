@@ -7,24 +7,20 @@
 #-------------------------------------------------------------------------------
 
 ##' @title connectToOpenSILEXWS
-##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
-##'            the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'
 ##' @param username character, login of the user to create the token
 ##' @param password character, password of the user to create the token
-##' @param reconnection logical, to force the client reconnection
+##' @param url character
 ##' @description load name space and connexion parameters of the webservice.
 ##' Execute only once at the beginning of the requests.
 ##' In the case of a WebService change of address or a renaming of services, please edit this list.
 ##' and execute the function.
 ##' Demonstration instances:
 ##' \describe{
-##' \item{WS1}{connectToOpenSILEXWS(apiID="ws_1_public","guestphis@supagro.inra.fr","guestphis",
-##'                            url = "http://147.100.179.156:8080/phenomeapi/resources/")}
-##' \item{WS2}{connectToOpenSILEXWS(apiID="ws_private",username="guest@opensilex.org",
-##'           password="guest", url = "http://www.opensilex.org/openSilexAPI/rest/")}
+##' connectToOpenSILEXWS(username="guest@opensilex.org",
+##'           password="guest", url = "http://www.opensilex.org/rest/")
 ##' }
 ##' @export
-connectToOpenSILEXWS<-function(username, password, url, reconnection = TRUE){
+connectToOpenSILEXWS<-function(username, password, url){
   
   if (is.null(username) || username == "") {
     stop("Please, give a username")
@@ -41,9 +37,9 @@ connectToOpenSILEXWS<-function(username, password, url, reconnection = TRUE){
   
   # get token
   tokenData = opensilexWSClientR::getToken(username,password)
-  
+   
   if(!is.null(tokenData) && length(tokenData) > 0) {
-    setLoginUserInformations(username, password, tokenData, reconnection)
+    setLoginUserInformations(username, password, tokenData)
   }else{
     stop("Not able to connect to the specified OpenSILEX WS")
   }
@@ -53,22 +49,21 @@ connectToOpenSILEXWS<-function(username, password, url, reconnection = TRUE){
 ##' @title connectToOpenSILEXWSWithToken
 ##' @description Save information in config environment
 ##' @param token character, set a token without reconnection
-##' @param wsVersion numeric, the version of the webservice
 ##' @param url character, if apiID is private add the url of the chosen API, containing the IP,
 ##'            the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'
 ##' @export
-connectToOpenSILEXWSWithToken<-function(token, url, wsVersion = 2){
+connectToOpenSILEXWSWithToken<-function(token, url){
+  
+  # TODO : get user informations
   # save user parameters in config environment
   assign("BASE_PATH", url, configWS)
   assign("TOKEN_VALUE", token, configWS)
   assign("USERNAME", "", configWS)
   assign("PASSWORD", "", configWS)
-  assign("WS_VERSION", wsVersion, configWS)
   assign("TOKEN_VALID",TRUE,configWS)
   assign("USER_VALID",TRUE,configWS)
   
   # set reconnection variable
-  assign("RECONNECT_ON_DISCONNECTION", FALSE)
   
   #debug
   logging::logdebug(paste("BASE_PATH",get("BASE_PATH", configWS)))

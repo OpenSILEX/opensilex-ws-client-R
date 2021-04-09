@@ -4,15 +4,13 @@
 \alias{connectToOpenSILEXWSWithToken}
 \title{connectToOpenSILEXWSWithToken}
 \usage{
-connectToOpenSILEXWSWithToken(token, url, wsVersion = 2)
+connectToOpenSILEXWSWithToken(token, url)
 }
 \arguments{
 \item{token}{character, set a token without reconnection}
 
 \item{url}{character, if apiID is private add the url of the chosen API, containing the IP,
 the full url with the protocol. e.g. 'http://www.opensilex.org/openSilexAPI/rest/'}
-
-\item{wsVersion}{numeric, the version of the webservice}
 }
 \description{
 Save information in config environment

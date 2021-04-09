@@ -19,9 +19,8 @@ Retrieves a user identifier for connexion to the WebService (WS)
 }
 \examples{
 \donttest{
-connectToOpenSILEXWS("guestphis@supagro.inra.fr","guestphis",
-         "http://147.100.179.156:8080/phenomeapi/resources/")
-aToken <- getToken("guestphis@supagro.inra.fr","guestphis")
+connectToOpenSILEXWS(username="admin@opensilex.org",   password="admin", url = "http://138.102.159.37:8081/rest")
+
 aToken$data
 }
 }

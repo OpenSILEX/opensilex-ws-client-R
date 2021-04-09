@@ -4,7 +4,7 @@
 \alias{setLoginUserInformations}
 \title{setLoginUserInformations}
 \usage{
-setLoginUserInformations(username, password, tokenData, reconnection = TRUE)
+setLoginUserInformations(username, password, tokenData)
 }
 \arguments{
 \item{tokenData}{S3 class, saves informations extract from WS getToken response}

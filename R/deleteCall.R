@@ -12,10 +12,9 @@
 ##' @param resource character, the name of the webservice resource
 ##' @param paramPath character, path URL encoded parameter
 ##' @param attributes query parameters
-##' @param requestBody character, body data which will be send
 ##' @return WSResponse WSResponse class instance
 ##' @export
-deleteResponseFromWS<-function(resource, requestBody, paramPath = NULL, attributes = list()){
+deleteResponseFromWS<-function(resource, paramPath = NULL, attributes = list()){
   #configWS<-connectToOpenSILEXWS()
   webserviceBaseUrl <- configWS[["BASE_PATH"]]
   urlParams = ""
@@ -42,7 +41,7 @@ deleteResponseFromWS<-function(resource, requestBody, paramPath = NULL, attribut
   }
 
   ptm <- proc.time()
-  r <- httr::DELETE(finalurl, body = requestBody,encode="json")
+  r <- httr::DELETE(finalurl, encode="json", config = httr::add_headers(Authorization=paste("Bearer ",get("TOKEN_VALUE",configWS), sep = "")))
   
   # debug
   logging::logdebug("Request Time : " )

@@ -19,10 +19,9 @@ disconnectFromOpenSILEXWS<-function(){
   if(!get("USER_VALID",configWS)) stop("You must first connect to an OpenSILEX Instance using connectToOpenSILEXWS() function")
   
   # delete WebService user session
-  if(get("WS_VERSION",configWS) == 2) {
-    requestBody <- list(access_token = get("TOKEN_VALUE",configWS))
-    deleteResponseFromWS(resource = get("BRAPITOKEN",configWS), requestBody = requestBody)
-  }
+  
+  deleteResponseFromWS(resource = get("DISCONNECTION",configWS))
+  
   
   assign("BASE_PATH","", configWS)
   assign("USERNAME","", configWS)

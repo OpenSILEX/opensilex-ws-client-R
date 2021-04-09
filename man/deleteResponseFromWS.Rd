@@ -4,17 +4,10 @@
 \alias{deleteResponseFromWS}
 \title{deleteResponseFromWS}
 \usage{
-deleteResponseFromWS(
-  resource,
-  requestBody,
-  paramPath = NULL,
-  attributes = list()
-)
+deleteResponseFromWS(resource, paramPath = NULL, attributes = list())
 }
 \arguments{
 \item{resource}{character, the name of the webservice resource}
-
-\item{requestBody}{character, body data which will be send}
 
 \item{paramPath}{character, path URL encoded parameter}
 

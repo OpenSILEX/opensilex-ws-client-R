@@ -4,13 +4,8 @@
 \alias{getResponseFromWS}
 \title{getResponseFromWS retrieves the data of a service from the WS}
 \usage{
-getResponseFromWS(
-  resource,
-  paramPath = NULL,
-  attributes,
-  wsVersion,
-  type = "application/json"
-)
+getResponseFromWS(resource, paramPath = NULL, attributes, wsVersion,
+  type = "application/json")
 }
 \arguments{
 \item{resource}{character, the name of the service to call}

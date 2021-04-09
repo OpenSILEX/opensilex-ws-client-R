@@ -131,37 +131,22 @@ setLogLevel <- function(level = "INFO") {
 setLoginUserInformations <-
   function(username,
            password,
-           tokenData,
-           reconnection = TRUE) {
+           tokenData
+           ) {
     # save user parameters in config environment
     assign("TOKEN_VALUE", tokenData$data, configWS)
     assign("USERNAME", username, configWS)
     assign("PASSWORD", password, configWS)
-    assign("WS_VERSION", tokenData$webserviceVersion, configWS)
-    assign("TOKEN_CREATED_AT", Sys.time(), configWS)
-    assign("TOKEN_VALID_TIME", tokenData$expiresIn , configWS)
-    assign("TOKEN_VALID", TRUE, configWS)
     assign("USER_VALID", TRUE, configWS)
-    
-    # set reconnection variable
-    if (!is.logical(reconnection)){
-        assign("RECONNECT_ON_DISCONNECTION", FALSE)
-    }else{
-        assign("RECONNECT_ON_DISCONNECTION", reconnection)
-    } 
-    
-    # on reconnection "TOKEN_VALID" parameters expires when WS reach end token validity
-    later::later(function() {
-      assign("TOKEN_VALID", FALSE, configWS)
-    }, tokenData$expiresIn + 1)
+    assign("TOKEN_VALID", TRUE, configWS)
     
     #debug
     logging::logdebug(paste("BASE_PATH", get("BASE_PATH", configWS)))
     logging::logdebug(paste("USERNAME", get("USERNAME", configWS)))
     logging::logdebug(paste("TOKEN_VALUE", get("TOKEN_VALUE", configWS)))
-    logging::logdebug(paste("WS_VERSION", get("WS_VERSION", configWS)))
-    logging::logdebug(paste("TOKEN_VALID_TIME", get("TOKEN_VALID_TIME", configWS)))
-  }
+    logging::logdebug(paste("USER_VALID", get("USER_VALID", configWS)))
+    logging::logdebug(paste("TOKEN_VALID", get("USER_VALID", configWS)))
+   }
 
 ##' @title getConfigInformations
 ##' @description show useful informations from config environment
@@ -171,22 +156,10 @@ getUserInformations <- function() {
   if (is.null(get("TOKEN_VALUE", configWS)))
     stop("Connect first using connectionToOpenSILEXWS() function")
   
-  nbSecondRemaining <- round(get("TOKEN_VALID_TIME", configWS)
-                             - abs(as.numeric(
-                               Sys.time()
-                             - get("TOKEN_CREATED_AT", configWS), units = "secs"
-                             )))
-  if (nbSecondRemaining < 0)
-    nbSecondRemaining = 0
-  
   df <- data.frame(
     "BASE_PATH" = get("BASE_PATH", configWS),
     "USERNAME" = get("USERNAME", configWS),
-    "TOKEN_VALUE" = get("TOKEN_VALUE", configWS),
-    "TOKEN_VALID_TIME" = get("TOKEN_VALID_TIME", configWS),
-    "TOKEN_EXPIRE_TIME" = nbSecondRemaining,
-    "TOKEN_VALID" = get("TOKEN_VALID", configWS),
-    "WS_VERSION" = get("WS_VERSION", configWS)
-  )
+    "TOKEN_VALUE" = get("TOKEN_VALUE", configWS)
+   )
   return(df)
 }
