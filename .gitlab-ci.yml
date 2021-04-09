@@ -1,7 +1,3 @@
-# you can delete this line if you're not using a specific Docker image
-# get more information at https://hub.docker.com/r/rocker/verse/
-image: rocker/verse:3.4.4
-
 # order of the different jobs
 stages:
   - build
@@ -12,32 +8,51 @@ stages:
 
 # define system environment variables
 variables:
+  PACKAGE_VERSION: "1.1.1"
   R_REPOS: "https://cloud.r-project.org"
   R_LIBS : ".cache/install_deps" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
   R_TMP_USER: "$CI_PROJECT_DIR/tmp"  # temporary directory
+  R_IMG_LIB: "/usr/local/lib/R/site-library"  # temporary directory
+
 
 # Cache R directories in between jobs
-cache:
+.cache_dependencies: &cache_dependencies
     key: "$CI_COMMIT_REF_SLUG"
     paths:
       - ".cache/install_deps"
       - ".Renviron"
 
-# load packages
-before_script:
-  - mkdir -p $R_LIBS
-  - echo 'R_LIBS_USER="$R_LIBS"' > .Renviron
-  - R -e '.libPaths()'
-  - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install_deps(dependencies = TRUE,lib = Sys.getenv("R_LIBS"), upgrade = FALSE)'
-  
+.prepare_script_r: &prepare_script_r
+  image: "registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4"
+ 
 # create an archive 
 buildBinary:
+  <<: *prepare_script_r
   stage: build
   script:
    - R -e 'devtools::build(binary = TRUE)'
 
+# create an docker image 
+build:image:
+  image: docker:19.03.12
+  stage: build
+  services:
+    - docker:19.03.12-dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker info
+    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4 --build-arg R_VERSION=3.4.4  .
+    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4
+  rules:
+    - when: manual
+      allow_failure: true
+
+
+
 checkErrors:
+  <<: *prepare_script_r
   stage: check
   script:
     - R -e '.libPaths()'
@@ -46,6 +61,7 @@ checkErrors:
     - if [ -f $R_TMP_USER/errorsFail ]; then echo "Check Errors"; exit 1 ; else echo "No Errors"; fi
 
 checkWarnings:
+  <<: *prepare_script_r
   allow_failure: true
   stage: check
   script:
@@ -55,6 +71,7 @@ checkWarnings:
     - if [ -f $R_TMP_USER/warningsFail ]; then echo "Check Warnings"; exit 1 ; else echo "No Warnings"; fi
 
 checkNotes:
+  <<: *prepare_script_r
   allow_failure: true
   stage: check
   script:
@@ -64,6 +81,7 @@ checkNotes:
     - if [ -f $R_TMP_USER/notesFail ]; then echo "Check Notes"; exit 1 ; else echo "No Notes"; fi
 
 unitTests:
+  <<: *prepare_script_r
   when: manual
   stage: test
   script:
@@ -73,6 +91,7 @@ unitTests:
     - if [ -f $R_TMP_USER/testsFail ]; then echo "Check Tests"; exit 1 ; else echo "Tests passed"; fi
     
 codeCoverage:
+  <<: *prepare_script_r
   allow_failure: true
   when: manual
   stage: test
@@ -80,14 +99,16 @@ codeCoverage:
     - R -e 'covr::codecov()'
 
 installFromGithub:
+  <<: *prepare_script_r
   allow_failure: true
   when: manual
   stage: test
   script:
-    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref=paste0("v",desc$get("Version")[[1]]))'
+    - R -e 'source("https://install-github.me/r-lib/desc");desc<-desc::description$new();remotes::install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref=desc$get("Version")[[1]])'
 
 
 installLocally:
+  <<: *prepare_script_r
   stage: test
   script:
     - R -e 'options(repos =c(CRAN=Sys.getenv("R_REPOS")));devtools::install(build_vignettes=TRUE,dependencies = TRUE)'
