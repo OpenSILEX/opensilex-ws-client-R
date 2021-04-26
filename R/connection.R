@@ -39,7 +39,16 @@ connectToOpenSILEXWS<-function(username, password, url){
   tokenData = opensilexWSClientR::getToken(username,password)
    
   if(!is.null(tokenData) && length(tokenData) > 0) {
-    setLoginUserInformations(username, password, tokenData)
+      setLoginUserInformations(username, password, tokenData)
+    
+      opensilex_api <- rapiclient::get_api(url = paste0(url,"/swagger.json"))
+      # add /rest to opensilex endpoint
+      opensilex_api$host = paste0(opensilex_api$host, "/rest")
+      operations <- rapiclient::get_operations(opensilex_api, .headers = c("Authorization" = paste("Bearer",get("TOKEN_VALUE",configWS))) )
+      schemas <- rapiclient::get_schemas(opensilex_api)
+      assign("OPENSILEX_API", opensilex_api, configWS)
+      assign("OPENSILEX_SCHEMAS", schemas, configWS)
+      assign("OPENSILEX_OPERATIONS", operations, configWS)
   }else{
     stop("Not able to connect to the specified OpenSILEX WS")
   }
@@ -62,6 +71,15 @@ connectToOpenSILEXWSWithToken<-function(token, url){
   assign("PASSWORD", "", configWS)
   assign("TOKEN_VALID",TRUE,configWS)
   assign("USER_VALID",TRUE,configWS)
+  
+  opensilex_api <- rapiclient::get_api(url = paste0(url,"/swagger.json"))
+  # add /rest to opensilex endpoint
+  opensilex_api$host = paste0(opensilex_api$host, "/rest")
+  operations <- rapiclient::get_operations(opensilex_api, .headers = c("Authorization" = paste("Bearer",get("TOKEN_VALUE",configWS))) )
+  schemas <- rapiclient::get_schemas(opensilex_api)
+  assign("OPENSILEX_API", opensilex_api, configWS)
+  assign("OPENSILEX_SCHEMAS", schemas, configWS)
+  assign("OPENSILEX_OPERATIONS", operations, configWS) 
   
   # set reconnection variable
   

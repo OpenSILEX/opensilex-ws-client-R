@@ -43,7 +43,7 @@ getDataAndShowStatus <- function(responseObject) {
       logging::loginfo("Additional Request information :")
       if (logging::getLogger()$level >  get("DEBUG_LEVEL", configWS)[["NOTSET"]] &&
           logging::getLogger()$level <=  get("DEBUG_LEVEL", configWS)[["INFO"]]) {
-        print(json$metadata$status)
+          logging::loginfo(json$metadata$status)
       }
       
       status = json$metadata$status
@@ -57,7 +57,65 @@ getDataAndShowStatus <- function(responseObject) {
       codeHttp = responseObject$status_code,
       codeHttpMessage = msg,
       codeStatusMessage = status,
-      data = c(json$result$data, json$metadata$datafiles)
+      data = c(json$result, json$metadata$datafiles)
+    )
+  }
+  class(response) <- append(class(response), "WSResponse")
+  return(response)
+}
+
+#' @title getDataAndMetadataFromResponse
+##'
+##' @description Retreive httr response status and data linked to it 
+##' @param responseObject objet de reponse HTTP httr
+##' @export
+getDataAndMetadataFromResponse <- function(responseObject) {
+  status = NULL
+  json = jsonlite::fromJSON(
+    httr::content(
+      responseObject,
+      as = "text",
+      encoding = "UTF-8")
+  )
+  msg <- showStatus(responseObject)
+  if (responseObject$status_code >= 400) {
+    if (!is.null(json$metadata$status) &&
+        length(json$metadata$status) > 0) {
+      status = json$metadata$status
+      logging::loginfo("Additional Request information :")
+      logging::loginfo(status)
+    }
+    
+    response <- list(
+      currentPage = NULL,
+      totalCount = NULL,
+      totalPages = NULL,
+      codeHttp = responseObject$status_code,
+      codeHttpMessage = msg,
+      codeStatusMessage = status,
+      data = NULL
+    )
+  } else {
+    if (!is.null(json$metadata$status) &&
+        length(json$metadata$status) > 0) {
+      logging::loginfo("Additional Request information :")
+      if (logging::getLogger()$level >  get("DEBUG_LEVEL", configWS)[["NOTSET"]] &&
+          logging::getLogger()$level <=  get("DEBUG_LEVEL", configWS)[["INFO"]]) {
+        logging::loginfo(json$metadata$status)
+      }
+      
+      status = json$metadata$status
+    }
+    
+    logging::loginfo(msg)
+    response <- list(
+      currentPage = json$metadata$pagination$currentPage,
+      totalCount = json$metadata$pagination$totalCount,
+      totalPages = json$metadata$pagination$totalPages,
+      codeHttp = responseObject$status_code,
+      codeHttpMessage = msg,
+      codeStatusMessage = status,
+      data = c(json$result, json$metadata$datafiles)
     )
   }
   class(response) <- append(class(response), "WSResponse")
@@ -139,7 +197,7 @@ setLoginUserInformations <-
     assign("PASSWORD", password, configWS)
     assign("USER_VALID", TRUE, configWS)
     assign("TOKEN_VALID", TRUE, configWS)
-    
+  
     #debug
     logging::logdebug(paste("BASE_PATH", get("BASE_PATH", configWS)))
     logging::logdebug(paste("USERNAME", get("USERNAME", configWS)))
@@ -147,6 +205,40 @@ setLoginUserInformations <-
     logging::logdebug(paste("USER_VALID", get("USER_VALID", configWS)))
     logging::logdebug(paste("TOKEN_VALID", get("USER_VALID", configWS)))
    }
+
+
+##' @title getApi
+##' @description show useful informations from opensilex api
+##' @return an object with raw informations from opensilex api
+##' @export
+getApi <- function() {
+  if (is.null(get("OPENSILEX_API", configWS)))
+    stop("Connect first using connectionToOpenSILEXWS() function")
+   
+  return(get("OPENSILEX_API", configWS))
+}
+
+##' @title getSchemas
+##' @description show model schema from opensilex api
+##' @return an object with raw informations about model schemas from opensilex api
+##' @export
+getSchemas <- function() {
+  if (is.null(get("OPENSILEX_SCHEMAS", configWS)))
+    stop("Connect first using connectionToOpenSILEXWS() function")
+  
+  return(get("OPENSILEX_SCHEMAS", configWS))
+}
+
+##' @title getOperations
+##' @description show operations from opensilex api
+##' @return an object with raw informations about operations from opensilex api
+##' @export
+getOperations <- function() {
+  if (is.null(get("OPENSILEX_OPERATIONS", configWS)))
+    stop("Connect first using connectionToOpenSILEXWS() function")
+   
+  return(get("OPENSILEX_OPERATIONS", configWS))
+}
 
 ##' @title getConfigInformations
 ##' @description show useful informations from config environment

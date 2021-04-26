@@ -14,10 +14,10 @@ To install the **opensilexWSClientR** package, the easiest is to install it dire
 
 ```R
 library(remotes)
-install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="2.0.0")
+install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="2.1.0")
 ```
 
-You can also download a tar.gz archive of "[2.0.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/2.0.0") version and install it with _install_packages()_.
+You can also download a tar.gz archive of "[2.1.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/2.1.0") version and install it with _install_packages()_.
 
 This package use [Semantic Versioning Specification](https://semver.org/) for versionning tags.
 
@@ -28,6 +28,28 @@ Once the package is installed on your computer, it can be loaded into a R sessio
 ```R
 library(opensilexWSClientR)
 help(package="opensilexWSClientR")
+```
+
+## Get Information from opensilex API
+
+```R
+library(opensilexWSClientR)
+opensilexClientToolsR::connectToOpenSILEX(username = "guest@opensilex.org", password = "guest",url = "http://localhost:8666/rest")
+sc <- getSchemas()
+sc$ProjectGetDTO
+#ProjectGetDTO(uri, name, shortname, start_date, end_date, description, objective, financial_funding, website,
+#    related_projects, coordinators, scientific_contacts, administrative_contacts, experiments)
+
+op <- getOperations()
+res <- op$searchProjects()
+result <- getDataAndMetadataFromResponse(res)
+s <- data.frame(d<-unlist(result$data),names(d))
+result$data
+# $uri
+# [1] "http://www.opensilex.org/demo/PHENOME-FPPN" "test-prj:abt_test"                          "test-prj:test"                             
+# [4] "test-prj:test/1"                           
+# .....
+
 ```
 
 ## Use this R package in another R package from github

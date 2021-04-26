@@ -26,7 +26,8 @@ getToken <- function(login, password) {
   tokenResp <-
     getTokenResponse(resource = get("AUTHENTICATION", configWS),
                      attributes = attributes)
-   
+  print(tokenResp)
+  response <- list()
   if (tokenResp$status_code >= 200 && tokenResp$status_code < 400) {
     json = jsonlite::fromJSON(httr::content(tokenResp, as = "text", encoding = "UTF-8"))
     
@@ -51,10 +52,9 @@ getToken <- function(login, password) {
   if (tokenResp$status_code > 250 && tokenResp$status_code > 250) {
     logging::logwarn("No web service available! Check your login/password and/or your url...")
   }
-  
-  print(response)
+ 
   # define class S3 and return the list if exists
-  if (exists("response")) {
+  if (length(response)) {
     class(response) <- append(class(response), "WSResponse")
     return(response)
   } else{
@@ -89,6 +89,7 @@ getTokenResponse <-
     
     # call
     ptm <- proc.time()
+ 
     r <- httr::POST(url = finalurl,
                     body = finalbody,
                     encode = "json")
