@@ -194,14 +194,14 @@ setLoginUserInformations <-
            ) {
     # save user parameters in config environment
     assign("TOKEN_VALUE", tokenData$data, configWS)
-    assign("USERNAME", username, configWS)
+    assign("IDENTIFIER", username, configWS)
     assign("PASSWORD", password, configWS)
     assign("USER_VALID", TRUE, configWS)
     assign("TOKEN_VALID", TRUE, configWS)
   
     #debug
     logging::logdebug(paste("BASE_PATH", get("BASE_PATH", configWS)))
-    logging::logdebug(paste("USERNAME", get("USERNAME", configWS)))
+    logging::logdebug(paste("IDENTIFIER", get("IDENTIFIER", configWS)))
     logging::logdebug(paste("TOKEN_VALUE", get("TOKEN_VALUE", configWS)))
     logging::logdebug(paste("USER_VALID", get("USER_VALID", configWS)))
     logging::logdebug(paste("TOKEN_VALID", get("USER_VALID", configWS)))
@@ -251,7 +251,7 @@ getUserInformations <- function() {
   
   df <- data.frame(
     "BASE_PATH" = get("BASE_PATH", configWS),
-    "USERNAME" = get("USERNAME", configWS),
+    "IDENTIFIER" = get("IDENTIFIER", configWS),
     "TOKEN_VALUE" = get("TOKEN_VALUE", configWS)
    )
   return(df)

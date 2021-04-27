@@ -67,7 +67,7 @@ connectToOpenSILEXWSWithToken<-function(token, url){
   # save user parameters in config environment
   assign("BASE_PATH", url, configWS)
   assign("TOKEN_VALUE", token, configWS)
-  assign("USERNAME", "", configWS)
+  assign("IDENTIFIER", "", configWS)
   assign("PASSWORD", "", configWS)
   assign("TOKEN_VALID",TRUE,configWS)
   assign("USER_VALID",TRUE,configWS)
@@ -85,7 +85,7 @@ connectToOpenSILEXWSWithToken<-function(token, url){
   
   #debug
   logging::logdebug(paste("BASE_PATH",get("BASE_PATH", configWS)))
-  logging::logdebug(paste("USERNAME",get("USERNAME",configWS)))
+  logging::logdebug(paste("IDENTIFIER",get("IDENTIFIER",configWS)))
   logging::logdebug(paste("TOKEN_VALUE",get("TOKEN_VALUE",configWS)))
   logging::logdebug(paste("WS_VERSION",get("WS_VERSION",configWS)))
   logging::logdebug(paste("TOKEN_VALID_TIME",get("TOKEN_VALID_TIME",configWS)))

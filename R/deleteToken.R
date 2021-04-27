@@ -24,7 +24,7 @@ disconnectFromOpenSILEXWS<-function(){
   
   
   assign("BASE_PATH","", configWS)
-  assign("USERNAME","", configWS)
+  assign("IDENTIFIER","", configWS)
   assign("PASSWORD","", configWS)
   assign("TOKEN_VALID", FALSE,configWS)
   assign("USER_VALID", FALSE,configWS)

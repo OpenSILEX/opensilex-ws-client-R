@@ -16,7 +16,7 @@
 ## keywords internal
 #   configWS <- list(BASE_PATH = "http://147.100.179.156:8080/phenomeapi/resources/",
 #                    TOKEN = "token",
-#                    USERNAME = "",
+#                    IDENTIFIER = "",
 #                    PASSWORD = "",
 #                    TOKEN_VALID = FALSE,
 #                    USER_VALID = FALSE,
@@ -31,7 +31,7 @@ configWS<-new.env(emptyenv())
 .onLoad <- function(libname, pkgname){
   # internal variables
   assign("BASE_PATH","", configWS)
-  assign("USERNAME","", configWS)
+  assign("IDENTIFIER","", configWS)
   assign("PASSWORD","", configWS)
   assign("TOKEN_VALID", FALSE,configWS)
   assign("USER_VALID", FALSE,configWS)
