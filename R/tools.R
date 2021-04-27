@@ -35,6 +35,7 @@ getDataAndShowStatus <- function(responseObject) {
       codeHttp = responseObject$status_code,
       codeHttpMessage = msg,
       codeStatusMessage = status,
+      metadata = json$metadata,
       data = NULL
     )
   } else {
@@ -57,6 +58,7 @@ getDataAndShowStatus <- function(responseObject) {
       codeHttp = responseObject$status_code,
       codeHttpMessage = msg,
       codeStatusMessage = status,
+      metadata = json$metadata,
       data = c(json$result, json$metadata$datafiles)
     )
   }
@@ -71,12 +73,9 @@ getDataAndShowStatus <- function(responseObject) {
 ##' @export
 getDataAndMetadataFromResponse <- function(responseObject) {
   status = NULL
-  json = jsonlite::fromJSON(
-    httr::content(
-      responseObject,
-      as = "text",
-      encoding = "UTF-8")
-  )
+  json = httr::content(
+      responseObject, 
+      encoding = "UTF-8") 
   msg <- showStatus(responseObject)
   if (responseObject$status_code >= 400) {
     if (!is.null(json$metadata$status) &&
@@ -93,6 +92,7 @@ getDataAndMetadataFromResponse <- function(responseObject) {
       codeHttp = responseObject$status_code,
       codeHttpMessage = msg,
       codeStatusMessage = status,
+      metadata = json$metadata,
       data = NULL
     )
   } else {
@@ -115,7 +115,8 @@ getDataAndMetadataFromResponse <- function(responseObject) {
       codeHttp = responseObject$status_code,
       codeHttpMessage = msg,
       codeStatusMessage = status,
-      data = c(json$result, json$metadata$datafiles)
+      metadata = json$metadata,
+      data = json$result
     )
   }
   class(response) <- append(class(response), "WSResponse")
