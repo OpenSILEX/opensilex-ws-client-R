@@ -14,10 +14,10 @@ To install the **opensilexWSClientR** package, the easiest is to install it dire
 
 ```R
 library(remotes)
-install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="2.1.0")
+install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="2.2.0")
 ```
 
-You can also download a tar.gz archive of "[2.1.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/2.1.0") version and install it with _install_packages()_.
+You can also download a tar.gz archive of "[2.2.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/2.2.0") version and install it with _install_packages()_.
 
 This package use [Semantic Versioning Specification](https://semver.org/) for versionning tags.
 
