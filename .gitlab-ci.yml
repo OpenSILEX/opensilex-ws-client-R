@@ -8,7 +8,7 @@ stages:
 
 # define system environment variables
 variables:
-  PACKAGE_VERSION: "1.1.1"
+  PACKAGE_VERSION: "3.0.0"
   R_REPOS: "https://cloud.r-project.org"
   R_LIBS : ".cache/install_deps" # dependencies cache
   R_ENVIRON : "$CI_PROJECT_DIR/.Renviron" # R environment cache
@@ -24,7 +24,7 @@ variables:
       - ".Renviron"
 
 .prepare_script_r: &prepare_script_r
-  image: "registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4"
+  image: "registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:4.0.5"
  
 # create an archive 
 buildBinary:
@@ -43,8 +43,8 @@ build:image:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
     - docker info
-    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4 --build-arg R_VERSION=3.4.4  .
-    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:3.4.4
+    - docker build -t $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse  --tag=registry.forgemia.inra.fr/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:4.0.5 --build-arg R_VERSION=4.0.5  .
+    - docker push $DOCKER_REGISTRY/opensilex/data-analysis-visualisation/opensilex-ws-client-r/r-tidyverse:4.0.5
   rules:
     - when: manual
       allow_failure: true
