@@ -55,6 +55,7 @@ checkErrors:
   <<: *prepare_script_r
   stage: check
   script:
+    - apt-get install qpdf -y
     - R -e '.libPaths()'
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["errors"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/errorsFail"), error = function(e) system("touch $R_TMP_USER/errorsFail"))'
@@ -65,6 +66,7 @@ checkWarnings:
   allow_failure: true
   stage: check
   script:
+    - apt-get install qpdf -y
     - R -e '.libPaths()'
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["warnings"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/warningsFail"), error = function(e) system("touch $R_TMP_USER/warningsFail"))'
@@ -75,6 +77,7 @@ checkNotes:
   allow_failure: true
   stage: check
   script:
+    - apt-get install qpdf -y
     - R -e '.libPaths()'
     - mkdir -p $R_TMP_USER
     - R -e 'tryCatch(if (!identical(devtools::check(document = FALSE, args = "--no-tests")[["notes"]], character(0))) system("mkdir -p $R_TMP_USER;touch $R_TMP_USER/notesFail"), error = function(e) system("touch $R_TMP_USER/notesFail"))'
