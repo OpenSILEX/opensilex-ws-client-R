@@ -188,13 +188,13 @@ setLogLevel <- function(level = "INFO") {
 ##' @description Save information in config environment
 ##' @keywords internal
 setLoginUserInformations <-
-  function(username,
+  function(identifier,
            password,
            tokenData
            ) {
     # save user parameters in config environment
     assign("TOKEN_VALUE", tokenData$data, configWS)
-    assign("IDENTIFIER", username, configWS)
+    assign("IDENTIFIER", identifier, configWS)
     assign("PASSWORD", password, configWS)
     assign("USER_VALID", TRUE, configWS)
     assign("TOKEN_VALID", TRUE, configWS)

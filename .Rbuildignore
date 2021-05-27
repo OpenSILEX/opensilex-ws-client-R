@@ -5,3 +5,4 @@
 ^packrat/
 ^\.Rprofile$
 .gitlab-ci.yml
+Dockerfile

@@ -9,24 +9,18 @@
 ##' @title retrieves a user identifier for connexion to the web service
 ##'
 ##' @description Retrieves a user identifier for connexion to the WebService (WS)
-##' @param login character, login of the user to create the token
+##' @param identifier character, login of the user to create the token
 ##' @param password character, password of the user to create the token
 
 ##' @return a session token user identifier in the WS
-##' @examples
-##' \donttest{
-##' connectToOpenSILEXWS(username="admin@opensilex.org",   password="admin", url = "http://138.102.159.37:8081/rest")
-##'
-##' aToken$data
-##' }
-##' @export
-getToken <- function(login, password) {
-  attributes <- list(username = login, password = password)
+##' @keywords internal
+getToken <- function(identifier, password) {
+  attributes <- list(identifier = identifier, password = password)
   
   tokenResp <-
     getTokenResponse(resource = get("AUTHENTICATION", configWS),
                      attributes = attributes)
-  print(tokenResp)
+ 
   response <- list()
   if (tokenResp$status_code >= 200 && tokenResp$status_code < 400) {
     json = jsonlite::fromJSON(httr::content(tokenResp, as = "text", encoding = "UTF-8"))
@@ -84,7 +78,7 @@ getTokenResponse <-
     # Create the body JSON list with the attributes
     # take care that httr::POST function doesn't allow to md5 object
     # I had to convert the md5 object into a string one with the toString() function
-    finalbody <- list(identifier = attributes[["username"]],
+    finalbody <- list(identifier = attributes[["identifier"]],
                       password = attributes[["password"]])
     
     # call

@@ -4,10 +4,10 @@
 \alias{connectToOpenSILEXWS}
 \title{connectToOpenSILEXWS}
 \usage{
-connectToOpenSILEXWS(username, password, url)
+connectToOpenSILEXWS(identifier, password, url)
 }
 \arguments{
-\item{username}{character, login of the user to create the token}
+\item{identifier}{character, login of the user to create the token}
 
 \item{password}{character, password of the user to create the token}
 
@@ -20,7 +20,9 @@ In the case of a WebService change of address or a renaming of services, please 
 and execute the function.
 Demonstration instances:
 \describe{
-connectToOpenSILEXWS(username="guest@opensilex.org",
-          password="guest", url = "http://www.opensilex.org/rest/")
+connectToOpenSILEXWS(
+          identifier="guest@opensilex.org",
+          password="guest", 
+          url = "http://www.opensilex.org/rest/")
 }
 }

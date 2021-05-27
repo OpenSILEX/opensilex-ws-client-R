@@ -7,7 +7,7 @@
 #-------------------------------------------------------------------------------
 
 ##' @title connectToOpenSILEXWS
-##' @param username character, login of the user to create the token
+##' @param identifier character, login of the user to create the token
 ##' @param password character, password of the user to create the token
 ##' @param url character
 ##' @description load name space and connexion parameters of the webservice.
@@ -16,14 +16,17 @@
 ##' and execute the function.
 ##' Demonstration instances:
 ##' \describe{
-##' connectToOpenSILEXWS(username="guest@opensilex.org",
-##'           password="guest", url = "http://www.opensilex.org/rest/")
+##' connectToOpenSILEXWS(
+##'           identifier="guest@opensilex.org",
+##'           password="guest", 
+##'           url = "http://www.opensilex.org/rest/")
 ##' }
+##' @import rapiclient
 ##' @export
-connectToOpenSILEXWS<-function(username, password, url){
+connectToOpenSILEXWS<-function(identifier, password, url){
   
-  if (is.null(username) || username == "") {
-    stop("Please, give a username")
+  if (is.null(identifier) || identifier == "") {
+    stop("Please, give a identifier")
   }
   if (is.null(password) ||  password == "") {
     stop("Please, give a user password")
@@ -36,10 +39,10 @@ connectToOpenSILEXWS<-function(username, password, url){
   assign("BASE_PATH", url, configWS)
   
   # get token
-  tokenData = opensilexWSClientR::getToken(username,password)
+  tokenData = getToken(identifier,password)
    
   if(!is.null(tokenData) && length(tokenData) > 0) {
-      setLoginUserInformations(username, password, tokenData)
+      setLoginUserInformations(identifier, password, tokenData)
     
       opensilex_api <- rapiclient::get_api(url = paste0(url,"/swagger.json"))
       # add /rest to opensilex endpoint

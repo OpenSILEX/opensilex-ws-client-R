@@ -4,10 +4,10 @@
 \alias{getToken}
 \title{retrieves a user identifier for connexion to the web service}
 \usage{
-getToken(login, password)
+getToken(identifier, password)
 }
 \arguments{
-\item{login}{character, login of the user to create the token}
+\item{identifier}{character, login of the user to create the token}
 
 \item{password}{character, password of the user to create the token}
 }
@@ -17,10 +17,4 @@ a session token user identifier in the WS
 \description{
 Retrieves a user identifier for connexion to the WebService (WS)
 }
-\examples{
-\donttest{
-connectToOpenSILEXWS(username="admin@opensilex.org",   password="admin", url = "http://138.102.159.37:8081/rest")
-
-aToken$data
-}
-}
+\keyword{internal}

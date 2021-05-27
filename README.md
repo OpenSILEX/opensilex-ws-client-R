@@ -14,10 +14,10 @@ To install the **opensilexWSClientR** package, the easiest is to install it dire
 
 ```R
 library(remotes)
-install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="2.2.0")
+install_github("OpenSILEX/opensilex-ws-client-r", build_vignettes=TRUE,ref="3.0.0")
 ```
 
-You can also download a tar.gz archive of "[2.2.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/2.2.0") version and install it with _install_packages()_.
+You can also download a tar.gz archive of "[3.0.0](https://github.com/OpenSILEX/opensilex-ws-client-r/tree/3.0.0") version and install it with _install_packages()_.
 
 This package use [Semantic Versioning Specification](https://semver.org/) for versionning tags.
 
@@ -34,7 +34,7 @@ help(package="opensilexWSClientR")
 
 ```R
 library(opensilexWSClientR)
-opensilexClientToolsR::connectToOpenSILEX(username = "guest@opensilex.org", password = "guest",url = "http://localhost:8666/rest")
+opensilexClientToolsR::connectToOpenSILEX(identifier = "guest@opensilex.org", password = "guest",url = "http://localhost:8666/rest")
 sc <- getSchemas()
 sc$ProjectGetDTO
 #ProjectGetDTO(uri, name, shortname, start_date, end_date, description, objective, financial_funding, website,
