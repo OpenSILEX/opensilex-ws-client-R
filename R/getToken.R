@@ -20,7 +20,6 @@ getToken <- function(identifier, password) {
   tokenResp <-
     getTokenResponse(resource = get("AUTHENTICATION", configWS),
                      attributes = attributes)
- 
   response <- list()
   if (tokenResp$status_code >= 200 && tokenResp$status_code < 400) {
     json = jsonlite::fromJSON(httr::content(tokenResp, as = "text", encoding = "UTF-8"))
